@@ -1,11 +1,74 @@
-import {test} from '@playwright/test'
+import { test } from "@playwright/test";
 
-test('My first test', async({page}) => {
-  await page.goto('http://localhost:4200')
-  await page.getByText('Forms').click()
-  await page.getByText('Form layouts').click()
-})
+test.afterAll(async () => {
+  console.log("Done with tests");
+  // ...
+});
+test.afterEach(async ({ page }) => {
+  console.log("afterEach tests");
+});
 
+test.beforeAll(async () => {
+  console.log("Before tests");
+});
+
+test.beforeEach(async () => {
+  console.log("beforeEach tests");
+});
+
+test.beforeEach(async ({ page }) => {
+  await page.goto("http://localhost:4200");
+  await page.getByText("Forms").click();
+});
+
+// test('My first test', async({page}) => {
+//   await page.goto('http://localhost:4200')
+//   await page.getByText('Forms').click()
+//   await page.getByText('Form layouts').click()
+// })
+
+// test('Navigate to the datepicker page', async({page}) => {
+//   await page.goto('http://localhost:4200')
+//   await page.getByText('Forms').click()
+//   await page.getByText('Datepicker').click()
+// })
+
+test("My first test", async ({ page }) => {
+  await page.getByText("Form layouts").click();
+});
+
+test("Navigate to the datepicker page", async ({ page }) => {
+  await page.getByText("Datepicker").click();
+});
+
+///////////
+
+test.beforeEach(async ({ page }) => {
+  await page.goto("http://localhost:4200");
+});
+
+test.describe("suite1", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.getByText("Charts").click();
+  });
+  test("first test", async ({ page }) => {
+    await page.getByText("Form Layout").click();
+  });
+  test("navigate to datepicker page", async ({ page }) => {
+    await page.getByText("Datepicker").click();
+  });
+});
+test.describe("suite2", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.getByText("Forms").click();
+  });
+  test("first test", async ({ page }) => {
+    await page.getByText("Form Layout").click();
+  });
+  test("navigate to datepicker page", async ({ page }) => {
+    await page.getByText("Datepicker").click();
+  });
+});
 
 //
 // So what is a promise?
