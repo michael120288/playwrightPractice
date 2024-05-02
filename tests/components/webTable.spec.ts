@@ -485,3 +485,286 @@ That's it, guys, and see you in the next lesson.
 
 
 */
+/*
+And in this lesson, we continue working with the tables.
+
+And I want to show you one more scenario how to loop through the table rows and make a validation of
+
+the table rows.
+
+For example, we have a feature in this table that we can make a search of the certain values.
+
+And let's say if I make a search by age 30, we have one output.
+
+If I put 20, we have five rows.
+
+And let's say I want to make a validation that when I make a search by age of 20, that output that
+
+I have in the table has only the values that have a 20 years old and we don't have anything else in
+
+this table.
+
+So let's automate this scenario.
+
+Going back to the previous test and we just continue what we did from the previous lesson.
+
+So scenario number three, test filter of the table.
+
+The first thing we need to identify the test data that we want to use.
+
+So let's say we use ages and I create array with the values that we want to use.
+
+We want to use age 20, we want to use 30.
+
+Let's say we want to use 40 and let's say another, some scenario, let's say 200 years old and data
+
+is not found.
+
+So we want to validate that if no data in the table, some other message should be showed up.
+
+In our example is no data found.
+
+Let's use the fourth value of 200.
+
+This will be the test data that we use and now we want to try each of these values inside of our search
+
+field and validate the result for each search request.
+
+So first of all, let me create a JavaScript loop.
+
+For let's h will be our iterator of ages.
+
+So we're going to loop through each of the value and for the each value we want to do what we want.
+
+First is to type this value inside of this input field.
+
+The locator for this input field will be very similar to what we did before.
+
+We can take this.
+
+Input editor, but instead of email, we will use age and this will be age as well.
+
+Okay.
+
+And what we want to fill out, we want to fill out the age value from our iterator instead of hardcoded
+
+value like this.
+
+And I guess let's run this real quick to see how it works.
+
+So it did not work what we did wrong.
+
+Probably locator is incorrect.
+
+Okay.
+
+Input Editor Placeholder by age.
+
+Let me double check.
+
+Right click inspect.
+
+Okay.
+
+This is not input editor.
+
+This is input filter.
+
+Okay.
+
+We replace it with input.
+
+Filter and let's run it one more time.
+
+Yeah, it worked right now.
+
+And you see it happened very, very quick.
+
+It went straight to the 200, but still we know that it is working.
+
+Now, the next step, we need to get all the rows from the table.
+
+For example, if I put 20 here now, we need to get all the rows of the filtering output and then for
+
+each of the row, we need to validate the very last column and loop through each of the row like that.
+
+So we create another loop inside of the already existing loop for let row will be iterator of and we
+
+need what we need to get first a locator for our rows.
+
+Const age rows equals to page dot locator to body space.
+
+TR So this simple locator will give us all the rows inside of the table body and then we use age rows
+
+and remember that locator.
+
+All that will create array for us of the web element and we need to use await to get each of the row
+
+and we create the body of our loop.
+
+Then for each of the row we need to get a cell value.
+
+Cell value equals to row.
+
+Sorry, await row locator.
+
+It's a column.
+
+We want to get a last column.
+
+We have a special method for that and we need to get a text content.
+
+So this constant will have a cell value for the row.
+
+And since this is a loop for each loop cycle, we will get a cell value for each of the row.
+
+And now we can make an assertion.
+
+Expect cell value.
+
+To equal to equal H.
+
+This one.
+
+Okay, that's it.
+
+So let's look one more time into the design of our code.
+
+We created all the test data that we want to use.
+
+Then we created a loop to loop through each of the values and then using each of the H, we want to
+
+find the input filter H.
+
+Then we want to type the value of the H.
+
+Then we find the all rows as a result of the search output.
+
+And then we are looping through each of the rows.
+
+We're getting all the rows all.
+
+And here is the each of the row in the table.
+
+And then we create a loop.
+
+Row number one, getting the text content, row number two, getting the text content and so on.
+
+And we should make an assertion that each row as a result will be equal to this.
+
+H So let's run this test.
+
+And this test is failed.
+
+So we can see that the first value entered successfully, but not the second one.
+
+So look into the error message.
+
+We see that expected 20 but received 38.
+
+Sounds very weird, right?
+
+So it's entered our loop.
+
+It got the value of the text content from the cell, but it got some interesting value of 38.
+
+It didn't get a 20, so assertion failed.
+
+So let's go back to the code and look one more time.
+
+If I change the value, look what happened.
+
+There is a certain little delay in the search, so when I type the value, it takes about half a second
+
+for the table to actually change the layout.
+
+So playwright is running faster than the change of the layout of our table.
+
+So we need to create a delay between typing the value inside of the cell and until this filter actually
+
+will be applied.
+
+And this is like an animation.
+
+So we cannot create, unfortunately, any dynamic waiting here.
+
+So we just need to wait like a half a second, create a hardcoded, wait to wait until the value will
+
+be updated.
+
+So let's modify this.
+
+We need to do it here before getting all the rows.
+
+We need to create a wait page, wait for timeout and we will provide just a short timeout of half a
+
+second.
+
+And let's run this one more time.
+
+Yeah, you can see Filter is working right now, but it's failed at the very last step.
+
+No data found because our assertion is not smart enough.
+
+It is expecting to have a 200 years old but received no data found.
+
+So we need to create a condition inside of our loop that if the value is 200, we actually expecting
+
+to have no data found.
+
+For the other types of the ages.
+
+We expected to receive the age as an output.
+
+So let's modify the script a little bit and we type if H equals to 200, then we expect the assertion.
+
+Else we expect this assertion for all other values.
+
+Okay.
+
+So we need just to find out this particular assertion locator.
+
+So going back type in 200, right click inspect and we have no data found and it is part of the body,
+
+so it's directly right as part of the table.
+
+So we can say, okay, we can take the text from the table and it should contain no data found.
+
+We can type locator like that.
+
+Expect page dot, get by role.
+
+We can take a table locator and we want to get all text content from the table.
+
+And we expect that this content to contain
+
+no data found.
+
+All right.
+
+And let's run this test one more time.
+
+All right.
+
+And right now, this test is passed.
+
+We validated each of the search results inside of the test.
+
+So let's quickly summarize what we did in this lesson.
+
+When you look through the list of the roles, you can use a regular for loop.
+
+In our example, we use first the test data and then we looped through the each of the row to validate
+
+those expectations.
+
+So we created a simple locator to get all the rows.
+
+Then out of those roles need to create an array using all method and then row represent the iterator
+
+for the row that you can access as a regular locator.
+
+Finding the columns that you want to interact with.
+
+And you can also use a conditions to tailor your assertion based on the output of the table.
+*/
