@@ -21,7 +21,7 @@ export class NavigationPage{
   }
 
   async smartTablePage(){
-    await this.selectGroupMenuItem('Tables & Data')
+    await this.selectGroupMenuItem('Table & Data')
 
     //await this.page.getByText('Tables & Data').click()
     await this.page.getByText('Smart Table').click()
