@@ -1,6 +1,7 @@
 import {test,expect} from '@playwright/test'
 import { NavigationPage} from '../../pageObject/Navigation.page'
 import {FormLayoutsPage} from '../../pageObject/Layout.page'
+import { DatePickerPage } from '../../pageObject/DatePicker.page'
 
 test.beforeEach(async ({page}) => {
   await page.goto('http://localhost:4200')
@@ -18,10 +19,14 @@ test('navigate to from page', async ({page}) => {
 test('parametrized methods', async({page})=>{
   const navigationPage = new NavigationPage(page)
   const formLayoutsPage = new FormLayoutsPage(page)
+  const datePickerPage = new DatePickerPage(page)
 
   await navigationPage.formLayoutsPage()
   await formLayoutsPage.submitInlineForm('mike@test.com','123456','Option 1')
   await formLayoutsPage.sumbitInlineForm('Mike','michael@test.com',true)
+  await navigationPage.datePickerPage()
+  await datePickerPage.selectDateFromDatePicker(5)
+  await datePickerPage.selectDatepickerWithRange(10,15)
 })
 
 /*
