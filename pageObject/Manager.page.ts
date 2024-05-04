@@ -18,7 +18,7 @@ export class PageNavigationManager {
     this.datePickerPage = new DatePickerPage(this.page);
   }
 
-  navigationPageClass(){
+  navigateToClass(){
     return this.navigationPage;
   }
 
