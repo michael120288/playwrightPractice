@@ -1,33 +1,37 @@
-import {test,expect} from '@playwright/test'
-import { NavigationPage} from '../../pageObject/Navigation.page'
-import {FormLayoutsPage} from '../../pageObject/Layout.page'
-import { DatePickerPage } from '../../pageObject/DatePicker.page'
+import { test, expect } from "@playwright/test";
+import { PageNavigationManager } from "../../pageObject/manager.page";
+import { NavigationPage } from "../../pageObject/Navigation.page";
+import { FormLayoutsPage } from "../../pageObject/Layout.page";
+import { DatePickerPage } from "../../pageObject/DatePicker.page";
 
-test.beforeEach(async ({page}) => {
-  await page.goto('http://localhost:4200')
-})
+test.beforeEach(async ({ page }) => {
+  await page.goto("http://localhost:4200");
+});
 
-test('navigate to from page', async ({page}) => {
-  const navigationPage = new NavigationPage(page)
-  await navigationPage.formLayoutsPage()
-  await navigationPage.datePickerPage()
-  await navigationPage.smartTablePage()
-  await navigationPage.toastrPage()
-  await navigationPage.tooltipPage()
-})
+test("navigate to from page", async ({ page }) => {
+  const pnm = new PageNavigationManager(page);
 
-test('parametrized methods', async({page})=>{
-  const navigationPage = new NavigationPage(page)
-  const formLayoutsPage = new FormLayoutsPage(page)
-  const datePickerPage = new DatePickerPage(page)
+  await pnm.navigationPageClass().formLayoutsPage();
+  await pnm.navigationPageClass().datePickerPage();
+  await pnm.navigationPageClass().smartTablePage();
+  await pnm.navigationPageClass().toastrPage();
+  await pnm.navigationPageClass().tooltipPage();
+});
 
-  await navigationPage.formLayoutsPage()
-  await formLayoutsPage.submitInlineForm('mike@test.com','123456','Option 1')
-  await formLayoutsPage.sumbitInlineForm('Mike','michael@test.com',true)
-  await navigationPage.datePickerPage()
-  await datePickerPage.selectDateFromDatePicker(5)
-  await datePickerPage.selectDatepickerWithRange(10,15)
-})
+test("parametrized methods", async ({ page }) => {
+  const pnm = new PageNavigationManager(page);
+
+  await pnm.navigationPageClass().formLayoutsPage();
+  await pnm
+    .formLayoutPageClass()
+    .submitInlineForm("mike@test.com", "123456", "Option 1");
+  await pnm
+    .formLayoutPageClass()
+    .sumbitInlineForm("Mike", "michael@test.com", true);
+  await pnm.navigationPageClass().datePickerPage();
+  await pnm.datePickerPageClass().selectDateFromDatePicker(5);
+  await pnm.datePickerPageClass().selectDatepickerWithRange(10, 15);
+});
 
 /*
 And in this lesson we will talk about parameterized methods inside of the page objects.
