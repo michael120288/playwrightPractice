@@ -1,6 +1,6 @@
 import { Page } from "@playwright/test";
 
-export class HelperBase{
+export class HelperBase {
   readonly page: Page;
 
   constructor(page: Page) {
@@ -10,5 +10,4 @@ export class HelperBase{
   async waitForNumberOfSeconds(seconds: number): Promise<void> {
     await this.page.waitForTimeout(seconds * 1000);
   }
-
 }

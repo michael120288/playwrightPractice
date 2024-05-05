@@ -1,7 +1,7 @@
 import { Page, expect } from "@playwright/test";
 import { HelperBase } from "./helper.page";
 
-export class DatePickerPage extends HelperBase{
+export class DatePickerPage extends HelperBase {
   constructor(page: Page) {
     super(page);
   }
@@ -18,11 +18,9 @@ export class DatePickerPage extends HelperBase{
     await calendarInputField.click();
     const startDateToAssert = await this.selectDate(startDate);
     const endDateToAssert = await this.selectDate(endDate);
-    const dateToAssert = `${startDateToAssert} - ${endDateToAssert}`
+    const dateToAssert = `${startDateToAssert} - ${endDateToAssert}`;
 
-    await expect(calendarInputField).toHaveValue(
-      dateToAssert
-    );
+    await expect(calendarInputField).toHaveValue(dateToAssert);
   }
 
   private async selectDate(daysFromToday: number): Promise<any> {

@@ -11,24 +11,24 @@ test.beforeEach(async ({ page }) => {
 test("navigate to from page", async ({ page }) => {
   const pnm = new PageNavigationManager(page);
 
-  await pnm.navigationPageClass().formLayoutsPage();
-  await pnm.navigationPageClass().datePickerPage();
-  await pnm.navigationPageClass().smartTablePage();
-  await pnm.navigationPageClass().toastrPage();
-  await pnm.navigationPageClass().tooltipPage();
+  await pnm.navigateToClass().formLayoutsPage();
+  await pnm.navigateToClass().datePickerPage();
+  await pnm.navigateToClass().smartTablePage();
+  await pnm.navigateToClass().toastrPage();
+  await pnm.navigateToClass().tooltipPage();
 });
 
 test("parametrized methods", async ({ page }) => {
   const pnm = new PageNavigationManager(page);
 
-  await pnm.navigationPageClass().formLayoutsPage();
+  await pnm.navigateToClass().formLayoutsPage();
   await pnm
     .formLayoutPageClass()
     .submitInlineForm("mike@test.com", "123456", "Option 1");
   await pnm
     .formLayoutPageClass()
     .sumbitInlineForm("Mike", "michael@test.com", true);
-  await pnm.navigationPageClass().datePickerPage();
+  await pnm.navigateToClass().datePickerPage();
   await pnm.datePickerPageClass().selectDateFromDatePicker(5);
   await pnm.datePickerPageClass().selectDatepickerWithRange(10, 15);
 });
