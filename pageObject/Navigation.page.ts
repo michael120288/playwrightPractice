@@ -1,5 +1,5 @@
 import { Page, Locator } from "@playwright/test";
-import { HelperBase } from "./helper.page";
+import { HelperBase } from "./Helper.page";
 
 export class NavigationPage extends HelperBase {
   readonly fromLayoutsMenuItem: Locator;
