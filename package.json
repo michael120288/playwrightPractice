@@ -10,7 +10,8 @@
     "ng": "ng",
     "start": "ng serve",
     "formsChrome":"npx playwright test forms.spec.ts --project=chromium",
-    "formsFirefox":"npx playwright test forms.spec.ts --project=firefox"
+    "formsFirefox":"npx playwright test forms.spec.ts --project=firefox",
+    "runAllFormsScript":" npm run formsChrome && npm run formsFirefox"
   },
   "dependencies": {
     "@angular/animations": "^14.2.12",
