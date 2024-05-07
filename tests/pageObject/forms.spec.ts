@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { PageNavigationManager } from "../../pageObject/manager.page";
+import { PageNavigationManager } from "../../pageObject/Manager.page";
 import { NavigationPage } from "../../pageObject/Navigation.page";
 import { FormLayoutsPage } from "../../pageObject/Layout.page";
 import { DatePickerPage } from "../../pageObject/DatePicker.page";
