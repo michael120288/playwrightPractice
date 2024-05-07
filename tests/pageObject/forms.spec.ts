@@ -3,45 +3,49 @@ import { PageNavigationManager } from "../../pageObject/Manager.page";
 import { NavigationPage } from "../../pageObject/Navigation.page";
 import { FormLayoutsPage } from "../../pageObject/Layout.page";
 import { DatePickerPage } from "../../pageObject/DatePicker.page";
-import {faker} from "@faker-js/faker"
+import { faker } from "@faker-js/faker";
+test.describe("FORMS", () => {
+  test.describe.configure({ retries: 2 });
 
-test.beforeEach(async ({ page }) => {
-  await page.goto("http://localhost:4200");
-});
+  test.beforeEach(async ({ page }) => {
+    await page.goto("http://localhost:4200");
+  });
 
-test("navigate to from page", async ({ page }) => {
-  const pnm = new PageNavigationManager(page);
+  test("navigate to from page", async ({ page }) => {
+    const pnm = new PageNavigationManager(page);
 
-  await pnm.navigateToClass().formLayoutsPage();
-  await pnm.navigateToClass().datePickerPage();
-  await pnm.navigateToClass().smartTablePage();
-  await pnm.navigateToClass().toastrPage();
-  await pnm.navigateToClass().tooltipPage();
-});
+    await pnm.navigateToClass().formLayoutsPage();
+    await pnm.navigateToClass().datePickerPage();
+    await pnm.navigateToClass().smartTablePage();
+    await pnm.navigateToClass().toastrPage();
+    await pnm.navigateToClass().tooltipPage();
+  });
 
-test("parametrized methods", async ({ page }) => {
-  const pnm = new PageNavigationManager(page);
+  test("parametrized methods", async ({ page }) => {
+    const pnm = new PageNavigationManager(page);
 
-  const randomFullName = faker.person.fullName()
-  const randomEmail = faker.internet.email()
-  const randomEmail2 = `${randomFullName.replace(" ", "")}${faker.number.int(1000)}@test.com`
+    const randomFullName = faker.person.fullName();
+    const randomEmail = faker.internet.email();
+    const randomEmail2 = `${randomFullName.replace(" ", "")}${faker.number.int(
+      1000,
+    )}@test.com`;
 
-  await pnm.navigateToClass().formLayoutsPage();
+    await pnm.navigateToClass().formLayoutsPage();
 
-  await pnm
-  .formLayoutPageClass()
-  .submitInlineForm("mike@test.com", "123456", "Option 1");
-  // await pnm
-  //   .formLayoutPageClass()
-  //   .sumbitInlineForm("Mike", "michael@test.com", true);
     await pnm
-    .formLayoutPageClass()
-    .sumbitInlineForm(randomFullName, randomEmail, true);
-  await pnm.navigateToClass().datePickerPage();
-  await pnm.datePickerPageClass().selectDateFromDatePicker(5);
-  await pnm.datePickerPageClass().selectDatepickerWithRange(10, 15);
+      .formLayoutPageClass()
+      .submitInlineForm("mike@test.com", "123456", "Option 1");
+    // await pnm
+    //   .formLayoutPageClass()
+    //   .sumbitInlineForm("Mike", "michael@test.com", true);
+    await pnm
+      .formLayoutPageClass()
+      .sumbitInlineForm(randomFullName, randomEmail, true);
+    await pnm.navigateToClass().datePickerPage();
+    await pnm.datePickerPageClass().selectDateFromDatePicker(5);
+    await pnm.datePickerPageClass().selectDatepickerWithRange(10, 15);
+  });
 });
-
 
 //faker npm install @faker-js/faker --save-dev --force
 /*
